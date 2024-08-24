@@ -5,21 +5,13 @@ BIN_DIR := $(PROJECT_DIR)/venv/bin
 SRC_DIR := $(PROJECT_DIR)/src
 NOTEBOOKS_DIR := $(PROJECT_DIR)/notebooks
 
-# Use PYTHONPATH and PATH from .env file if it exists
--include .env
-
 .PHONY: install clean test lint format run help
 
 venv:
 	python3.12 -m venv venv
 	$(BIN_DIR)/python -m pip install --upgrade pip
 
-
-.env: venv
-	@echo "PYTHONPATH=$(shell pwd)" >> .env
-	@echo "PATH=$(shell pwd)/$(BIN_DIR):$$PATH" >> .env
-
-venv/dependencies: venv .env requirements.lock
+venv/dependencies: venv requirements.lock
 	$(BIN_DIR)/pip install -r requirements.lock
 	@touch venv/dependencies
 
@@ -34,7 +26,7 @@ clean:
 	find . -type f -name '*.pyc' -delete
 	find . -type d -name '__pycache__' -delete
 
-requirements.lock: venv .env
+requirements.lock: venv
 	$(BIN_DIR)/pip install -r requirements.txt
 	$(BIN_DIR)/pip freeze > requirements.lock
 	touch requirements.lock
