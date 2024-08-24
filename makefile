@@ -13,7 +13,7 @@ NOTEBOOKS_DIR := $(PROJECT_DIR)/notebooks
 venv:
 	python3.12 -m venv venv
 	$(BIN_DIR)/python -m pip install --upgrade pip
-	
+
 
 .env: venv
 	@echo "PYTHONPATH=$(shell pwd)" >> .env
