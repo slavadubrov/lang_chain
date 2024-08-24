@@ -1,0 +1,12 @@
+langchain
+langchain_community
+langchain-openai
+langchain_experimental
+python-dotenv
+openai
+tiktoken
+pandas
+numpy
+numexpr
+docarray
+wikipedia
